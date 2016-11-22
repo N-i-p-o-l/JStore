@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div>
-  <a href="<spring:url value="add"/>">Add catalog</a>
+  <a href=" <c:url value="/catalog/add"/>" />Add catalog</a>
 </div>
 
 <table class="table table-hover">
@@ -16,12 +16,14 @@
   <tbody>
   <c:forEach var="catalog" items="${catalogs}">
     <tr>
-      <td>${catalog.name}</td>
       <td>
-        <a href="<spring:url value="catalog/update?id=${catalog.id}"/>" class="btn btn-success">
+        <a href="<c:url value="/catalog/${catalog.id}"/>">${catalog.name}</a>
+      </td>
+      <td>
+        <a href="<c:url value="/catalog/edit?id=${catalog.id}"/>" class="btn btn-success">
             <span class="glyphicon glyphicon-pencil"></span>
         </a>
-        <a href="<spring:url value="catalog/remove?id=${catalog.id}"/>" class="btn btn-danger">
+        <a href="<c:url value="/catalog/remove?id=${catalog.id}"/>" class="btn btn-danger">
           <span class="glyphicon glyphicon-trash"></span>
         </a>
       </td>

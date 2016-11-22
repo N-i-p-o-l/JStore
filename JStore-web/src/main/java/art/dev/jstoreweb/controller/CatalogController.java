@@ -2,12 +2,11 @@ package art.dev.jstoreweb.controller;
 
 import art.dev.jstorecore.entity.Catalog;
 import art.dev.jstorecore.service.ICatalogService;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/catalog")
@@ -32,6 +31,26 @@ public class CatalogController {
   @PostMapping("/add")
   public String processAddCatalog(@ModelAttribute("catalog") Catalog catalog) {
     catalogService.saveCatalog(catalog);
+    return "redirect:/catalog";
+  }
+
+  @RequestMapping("{id}")
+  public String catalogProducts(@PathVariable Long id, Model model) {
+    model.addAttribute("catalog", catalogService.findCatalogById(id));
+    //ToDO Search products
+    return "catalog-products";
+  }
+
+  @RequestMapping("/edit")
+  public String editCatalog(@RequestParam Long id, Model model) {
+    model.addAttribute("catalog", catalogService.findCatalogById(id));
+    return "catalog-add";
+  }
+
+  @RequestMapping("/remove")
+  public String removeCatalog(@RequestParam Long id) {
+    catalogService.removeCatalog(id);
+    //ToDo return alert additionally to view
     return "redirect:/catalog";
   }
 
