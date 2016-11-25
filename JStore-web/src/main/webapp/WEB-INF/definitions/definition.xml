@@ -24,4 +24,14 @@
     <put-attribute name="body" value="/WEB-INF/views/catalog/catalog-add.jsp" />
   </definition>
 
+  <definition name="catalog-products" extends="common">
+    <put-attribute name="title" value="page.catalog-products.title" />
+    <put-attribute name="body" value="/WEB-INF/views/catalog/catalog-products.jsp" />
+  </definition>
+
+  <definition name="product-add" extends="common">
+    <put-attribute name="title" value="page.product-add.title" />
+    <put-attribute name="body" value="/WEB-INF/views/product/product-add.jsp" />
+  </definition>
+
 </tiles-definitions>

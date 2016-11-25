@@ -4,6 +4,7 @@ import com.google.common.base.MoreObjects;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "catalog")
@@ -29,6 +30,9 @@ public class Catalog {
   }
 
   private String name;
+
+  @OneToMany(mappedBy = "catalog", cascade = CascadeType.REMOVE)
+  private Set<Product> products;
 
   @Override
   public int hashCode() {

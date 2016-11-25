@@ -1,12 +1,16 @@
 package art.dev.jstoreweb.controller;
 
 import art.dev.jstorecore.entity.Catalog;
+import art.dev.jstorecore.entity.Product;
 import art.dev.jstorecore.service.ICatalogService;
+import art.dev.jstorecore.service.IProductService;
 import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/catalog")
@@ -36,8 +40,10 @@ public class CatalogController {
 
   @RequestMapping("{id}")
   public String catalogProducts(@PathVariable Long id, Model model) {
-    model.addAttribute("catalog", catalogService.findCatalogById(id));
-    //ToDO Search products
+    List<Product> products = catalogService.findProductsByCatalogId(id);
+    model.addAttribute("products", products);
+    model.addAttribute("id", id);
+
     return "catalog-products";
   }
 
