@@ -10,7 +10,9 @@
   <thead>
   <tr>
     <th>Name</th>
+    <th>Description</th>
     <th>Action</th>
+    <th>Image</th>
   </tr>
   </thead>
   <tbody>
@@ -19,6 +21,7 @@
       <td>
         <a href="<c:url value="/product/${product.id}"/>">${product.name}</a>
       </td>
+      <td> ${product.description} </td>
       <td>
         <a href="<c:url value="/product/edit?id=${product.id}"/>" class="btn btn-success">
           <span class="glyphicon glyphicon-pencil"></span>
@@ -26,6 +29,9 @@
         <a href="<c:url value="/product/remove?id=${product.id}"/>" class="btn btn-danger">
           <span class="glyphicon glyphicon-trash"></span>
         </a>
+      </td>
+      <td>
+        <img src=" <c:url value="/resources/images/${product.id}.png"/> " alt="image" style="width:10%">
       </td>
     </tr>
   </c:forEach>

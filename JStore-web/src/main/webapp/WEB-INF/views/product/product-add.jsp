@@ -15,7 +15,7 @@
   </c:choose>
 
   <spring:url value="/product/add" var="actionUrl" />
-  <form:form modelAttribute="product" method="post"
+  <form:form modelAttribute="product" method="post" enctype="multipart/form-data"
              class="form-horizontal" action="${actionUrl}">
     <form:errors path="*" cssClass="alert alert-danger" element="div"/>
     <fieldset>
@@ -48,7 +48,7 @@
       <spring:bind path="unitsInStock">
         <div class="form-group">
           <label class="control-label col-lg-2 col-lg-2" for="unitsInStock">
-            unitsInStock
+            UnitsInStock
           </label>
           <div class="col-lg-10">
             <form:input path="unitsInStock" type="text" class="form:input-large" placeholder="unitsInStock"/>
@@ -68,6 +68,15 @@
           </div>
         </div>
       </spring:bind>
+
+      <div class="form-group">
+        <label class="control-label col-lg-2 col-lg-2" for="file">
+          Image
+        </label>
+        <div class="col-lg-10">
+          <input type="file" name="file" id="file"/><br/>
+        </div>
+      </div>
 
       <div class="form-group">
         <div class="col-lg-offset-2 col-lg-10">

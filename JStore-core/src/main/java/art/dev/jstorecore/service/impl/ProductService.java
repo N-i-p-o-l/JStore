@@ -7,7 +7,10 @@ import art.dev.jstorecore.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -15,6 +18,8 @@ import java.util.List;
 public class ProductService implements IProductService {
 
   @Autowired private ProductRepository productRepository;
+
+  private final static String imagesPath = "resources\\images\\";
 
   @Override
   public List<Product> findProductByCatalog(Catalog catalog) {
@@ -34,5 +39,16 @@ public class ProductService implements IProductService {
   @Override
   public void removeProduct(Long id) {
     productRepository.delete(id);
+  }
+
+  @Override
+  public void saveProductImage(Long id, MultipartFile file, String path) {
+    if (file != null && !file.isEmpty()) {
+        try {
+          file.transferTo(new File(path + imagesPath + id + ".png"));
+        } catch (IOException e) {
+            throw new RuntimeException("Product Image saving failed", e);
+      }
+    }
   }
 }

@@ -2,6 +2,7 @@ package art.dev.jstorecore.service;
 
 import art.dev.jstorecore.entity.Catalog;
 import art.dev.jstorecore.entity.Product;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface IProductService {
   void saveProduct(Product product);
 
   void removeProduct(Long id);
+
+  void saveProductImage(Long id, MultipartFile file, String path);
 }
