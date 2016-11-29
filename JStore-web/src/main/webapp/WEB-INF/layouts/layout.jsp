@@ -3,6 +3,7 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <head>
@@ -22,6 +23,10 @@
   <div class="header">
 
     <h3 class="text-muted">JStore</h3>
+
+    <security:authorize access="isAuthenticated()">
+      <h1>You are logged</h1>
+    </security:authorize>
 
     <ul class="nav nav-pills pull-right">
       <tiles:insertAttribute name="header" />

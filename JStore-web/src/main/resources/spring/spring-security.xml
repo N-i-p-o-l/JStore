@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+                    http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+                    http://www.springframework.org/schema/security
+                    http://www.springframework.org/schema/security/spring-security-4.1.xsd">
+
+  <http use-expressions="true">
+    <csrf disabled="true" />
+    <intercept-url pattern="/" access="permitAll" />
+    <form-login login-page="/login" login-processing-url="/loginprocessing" />
+    <logout logout-url="/logout" logout-success-url="/" />
+  </http>
+
+  <beans:bean id="encoder"
+              class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+  </beans:bean>
+
+  <beans:bean id="userDetailsService"
+              class="art.dev.jstorecore.service.impl.UserDetailsServiceImpl">
+  </beans:bean>
+
+  <authentication-manager>
+
+    <authentication-provider>
+      <user-service>
+        <user name="admin" password="admin" authorities="ROLE_ADMIN" />
+        <user name="user" password="user" authorities="ROLE_USER" />
+      </user-service>
+    </authentication-provider>
+
+    <authentication-provider user-service-ref="userDetailsService">
+      <password-encoder ref="encoder"></password-encoder>
+    </authentication-provider>
+  </authentication-manager>
+
+</beans:beans>

@@ -34,4 +34,9 @@
     <put-attribute name="body" value="/WEB-INF/views/product/product-add.jsp" />
   </definition>
 
+  <definition name="login" extends="common">
+    <put-attribute name="title" value="page.login.title" />
+    <put-attribute name="body" value="/WEB-INF/views/auth/login.jsp" />
+  </definition>
+
 </tiles-definitions>
