@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -39,10 +40,11 @@ public class CatalogController {
   }
 
   @RequestMapping("{id}")
-  public String catalogProducts(@PathVariable Long id, Model model) {
+  public String catalogProducts(@PathVariable Long id, Model model, HttpSession session) {
     List<Product> products = catalogService.findProductsByCatalogId(id);
     model.addAttribute("products", products);
-    model.addAttribute("id", id);
+    //model.addAttribute("id", id);
+    session.setAttribute("catalog_id", id);
 
     return "catalog-products";
   }

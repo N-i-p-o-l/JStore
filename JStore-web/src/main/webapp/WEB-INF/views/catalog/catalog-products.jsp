@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div>
-  <a href=" <c:url value="/product/add?id=${id}"/>" />Add Product</a>
+  <a href=" <c:url value="/product/add?id=${catalog_id}"/>" >Add Product</a>
 </div>
 
 <table class="table table-hover">
@@ -18,9 +18,7 @@
   <tbody>
   <c:forEach var="product" items="${products}">
     <tr>
-      <td>
-        <a href="<c:url value="/product/${product.id}"/>">${product.name}</a>
-      </td>
+      <td> ${product.name} </td>
       <td> ${product.description} </td>
       <td>
         <a href="<c:url value="/product/edit?id=${product.id}"/>" class="btn btn-success">
