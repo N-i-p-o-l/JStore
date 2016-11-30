@@ -1,7 +1,7 @@
 package art.dev.jstorecore.service.impl;
 
 import art.dev.jstorecore.entity.Customer;
-import art.dev.jstorecore.repository.UserRepository;
+import art.dev.jstorecore.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -17,7 +17,7 @@ import java.util.Collection;
 @Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-  @Autowired UserRepository userRepository;
+  @Autowired CustomerRepository userRepository;
 
   @Override public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
     Customer customer = null;
@@ -29,7 +29,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     Collection<SimpleGrantedAuthority> authorities = new ArrayList();
-    authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+    authorities.add(new SimpleGrantedAuthority(customer.getRole().getUserRole()));
 
     return new User(customer.getLogin(), customer.getPassword(), authorities);
   }

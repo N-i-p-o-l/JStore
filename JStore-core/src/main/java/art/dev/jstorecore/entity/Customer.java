@@ -7,6 +7,10 @@ import java.util.Objects;
 @Table(name = "customer")
 public class Customer {
 
+  public Customer() {
+    this.setRole(Role.USER);
+  }
+
   @Id
   @GeneratedValue
   private Long id;
@@ -17,9 +21,12 @@ public class Customer {
 
   private String email;
 
-  @OneToOne
-  @JoinColumn(name = "role_id")
   private Role role;
+
+  @Enumerated(EnumType.ORDINAL)
+  public Role getRole() {
+    return role;
+  }
 
   @Override
   public boolean equals(Object obj) {
@@ -66,10 +73,6 @@ public class Customer {
 
   public void setEmail(String email) {
     this.email = email;
-  }
-
-  public Role getRole() {
-    return role;
   }
 
   public void setRole(Role role) {

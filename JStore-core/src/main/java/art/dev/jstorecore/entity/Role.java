@@ -1,58 +1,17 @@
 package art.dev.jstorecore.entity;
 
-import javax.persistence.*;
-import java.util.Objects;
+public enum Role {
 
-@Entity
-@Table(name = "role")
-public class Role {
+  ADMIN("ROLE_ADMIN"),
+  USER("ROLE_USER");
 
-  @Id
-  @GeneratedValue
-  private Long id;
-
-  private String name;
-
-  @OneToOne(mappedBy = "role")
-  private Customer customer;
-
-  @Override
-  public boolean equals(Object obj) {
-    if (obj == null || getClass() != obj.getClass()) {
-      return false;
-    }
-    Role other = (Role) obj;
-    return Objects.equals(id, other.id)
-        && Objects.equals(name, other.name);
+  Role(String userRole) {
+    this.userRole = userRole;
   }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, name);
-  }
+  String userRole;
 
-  public Long getId() {
-    return id;
+  public String getUserRole() {
+    return userRole;
   }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public Customer getCustomer() {
-    return customer;
-  }
-
-  public void setCustomer(Customer customer) {
-    this.customer = customer;
-  }
-
 }

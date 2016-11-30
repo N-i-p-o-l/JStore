@@ -39,4 +39,9 @@
     <put-attribute name="body" value="/WEB-INF/views/auth/login.jsp" />
   </definition>
 
+  <definition name="register" extends="common">
+    <put-attribute name="title" value="page.register.title" />
+    <put-attribute name="body" value="/WEB-INF/views/auth/register.jsp" />
+  </definition>
+
 </tiles-definitions>

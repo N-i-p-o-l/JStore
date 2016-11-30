@@ -1,2 +1,2 @@
-<h1>Welcome</h1>
+<h2 align="center">Welcome to JStore!</h2>
 
