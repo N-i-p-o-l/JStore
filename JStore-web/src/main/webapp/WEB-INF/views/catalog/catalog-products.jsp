@@ -3,6 +3,18 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<script type="text/javascript">
+  var addToCart = function (element) {
+    $.ajax({
+      url: "/cart/add/" + element,
+      method: "GET",
+      error: function (req, status, err) {
+        console.log( 'Error add to cart', status, err);
+      }
+    });
+  }
+</script>
+
 <sec:authorize access="hasRole('ROLE_ADMIN')">
 <div>
   <a href=" <c:url value="/product/add?id=${catalog_id}"/>" >Add Product</a>
@@ -35,7 +47,9 @@
       </sec:authorize>
 
       <sec:authorize access="!hasRole('ROLE_ADMIN')">
-        <td>Actions not allowed</td>
+        <td>
+          <a href="#" class="btn btn-primary" onclick="addToCart(${product.id})">Add to cart</a>
+        </td>
       </sec:authorize>
 
       <td>

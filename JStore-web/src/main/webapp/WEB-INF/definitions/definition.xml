@@ -44,4 +44,9 @@
     <put-attribute name="body" value="/WEB-INF/views/auth/register.jsp" />
   </definition>
 
+  <definition name="cart" extends="common">
+    <put-attribute name="title" value="page.cart.title" />
+    <put-attribute name="body" value="/WEB-INF/views/cart/cart.jsp" />
+  </definition>
+
 </tiles-definitions>

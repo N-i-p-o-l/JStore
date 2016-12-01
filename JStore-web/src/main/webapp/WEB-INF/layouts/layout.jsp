@@ -14,6 +14,7 @@
   </c:set>
   <title><spring:message code="${titleKey}"/></title>
   <link href="${pageContext.servletContext.contextPath}/resources/css/bootstrap.css" rel="stylesheet">
+  <script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/jquery.js"></script>
   <script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/bootstrap.js"></script>
 </head>
 <body>
