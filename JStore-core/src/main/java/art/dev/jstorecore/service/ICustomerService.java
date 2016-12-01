@@ -15,5 +15,6 @@ public interface ICustomerService {
 
   void saveCustomer(Customer customer);
 
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
   void removeCustomer(Long id);
 }
