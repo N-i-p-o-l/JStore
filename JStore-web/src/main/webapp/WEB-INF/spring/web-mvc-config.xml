@@ -11,7 +11,7 @@
                http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
   <!--Здесь сканируем компоненты controller-->
-  <context:component-scan base-package="art.dev.jstoreweb.controller"/>
+  <context:component-scan base-package="art.dev.jstoreweb"/>
 
   <!--Поддержка аннотаций-->
   <mvc:annotation-driven/>

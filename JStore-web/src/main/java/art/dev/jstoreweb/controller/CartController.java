@@ -32,4 +32,10 @@ public class CartController {
     return "cart";
   }
 
+  //View for angular
+  @GetMapping("/view")
+  public String getViewWithProducts() {
+    return "product-rest";
+  }
+
 }

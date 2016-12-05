@@ -34,6 +34,7 @@
 
     <apache.tiles.version>3.0.7</apache.tiles.version>
     <guava.version>20.0</guava.version>
+    <jackson.version>2.8.5</jackson.version>
 
     <maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
     <maven-jar-plugin.version>2.5</maven-jar-plugin.version>
@@ -182,6 +183,19 @@
       <artifactId>commons-fileupload</artifactId>
       <version>1.3.2</version>
     </dependency>
+
+    <!--Jackson -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
+
   </dependencies>
 
   <build>
