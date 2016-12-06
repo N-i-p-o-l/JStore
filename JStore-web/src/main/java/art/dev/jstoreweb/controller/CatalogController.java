@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import java.util.List;
 public class CatalogController {
 
   @Autowired ICatalogService catalogService;
+  @Autowired IProductService productService;
 
   @RequestMapping
   public String list(Model model) {
@@ -42,7 +44,7 @@ public class CatalogController {
 
   @RequestMapping("{id}")
   public String catalogProducts(@PathVariable Long id, Model model, HttpSession session) {
-    List<Product> products = catalogService.findProductsByCatalogId(id);
+    List<Product> products = productService.findProductsByCatalogId(id);
     model.addAttribute("products", products);
     //model.addAttribute("id", id);
     session.setAttribute("catalog_id", id);
@@ -61,6 +63,15 @@ public class CatalogController {
     catalogService.removeCatalog(id);
     //ToDo return alert additionally to view
     return "redirect:/catalog";
+  }
+
+  @PostMapping("/filter")
+  public String getFilteredProducts(HttpServletRequest request, HttpSession session, Model model) {
+    String name = request.getParameter("name");
+    Long id = (Long) session.getAttribute("catalog_id");
+    model.addAttribute("products", productService.filterByNameAndCatalogId(name, id));
+
+    return "catalog-products";
   }
 
 }

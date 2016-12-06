@@ -2,6 +2,7 @@ package art.dev.jstorecore.service.impl;
 
 import art.dev.jstorecore.entity.Catalog;
 import art.dev.jstorecore.entity.Product;
+import art.dev.jstorecore.repository.CatalogRepository;
 import art.dev.jstorecore.repository.ProductRepository;
 import art.dev.jstorecore.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,22 @@ import java.util.List;
 public class ProductService implements IProductService {
 
   @Autowired private ProductRepository productRepository;
+  @Autowired private CatalogRepository catalogRepository;
 
   private final static String imagesPath = "resources\\images\\";
 
   @Override
   public List<Product> findProductByCatalog(Catalog catalog) {
+    return productRepository.findByCatalog(catalog);
+  }
+
+  @Override
+  public List<Product> filterByNameAndCatalogId(String name, long id) {
+    return productRepository.filterByNameAndCatalogId(name, id);
+  }
+
+  @Override public List<Product> findProductsByCatalogId(Long id) {
+    Catalog catalog = catalogRepository.findOne(id);
     return productRepository.findByCatalog(catalog);
   }
 

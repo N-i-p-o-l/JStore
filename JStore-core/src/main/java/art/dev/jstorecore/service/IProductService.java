@@ -9,9 +9,13 @@ import java.util.List;
 
 public interface IProductService {
 
+  Product findProductById(Long id);
+
   List<Product> findProductByCatalog(Catalog catalog);
 
-  Product findProductById(Long id);
+  List<Product> filterByNameAndCatalogId(String name, long id);
+
+  List<Product> findProductsByCatalogId(Long id);
 
   @PreAuthorize("hasRole('ROLE_ADMIN')")
   void saveProduct(Product product);

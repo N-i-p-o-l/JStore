@@ -10,8 +10,6 @@ public interface ICatalogService {
 
   List<Catalog> findAll();
 
-  List<Product> findProductsByCatalogId(Long id);
-
   Catalog findCatalogById(Long id);
 
   @PreAuthorize("hasRole('ROLE_ADMIN')")

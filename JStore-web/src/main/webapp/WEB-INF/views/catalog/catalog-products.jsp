@@ -21,6 +21,15 @@
 </div>
 </sec:authorize>
 
+<spring:url value="/catalog/filter" var="actionUrl" />
+<form method="post" action="${actionUrl}">
+  <dl>
+    <dd><input type="text" name="name" placeholder="Enter name to search" value="${param.name}"></dd>
+  </dl>
+
+  <input type="submit" id="btnAdd" class="btn btn-primary" value ="Search"/>
+</form>
+
 <table class="table table-hover">
   <thead>
   <tr>

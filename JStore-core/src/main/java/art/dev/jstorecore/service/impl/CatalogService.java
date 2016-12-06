@@ -18,11 +18,6 @@ public class CatalogService implements ICatalogService {
   @Autowired private CatalogRepository catalogRepository;
   @Autowired private ProductRepository productRepository;
 
-  @Override public List<Product> findProductsByCatalogId(Long id) {
-    Catalog catalog = findCatalogById(id);
-    return productRepository.findByCatalog(catalog);
-  }
-
   @Override public List<Catalog> findAll() {
     return catalogRepository.findAll();
   }
