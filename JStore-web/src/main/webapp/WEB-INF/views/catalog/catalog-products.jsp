@@ -15,12 +15,6 @@
   }
 </script>
 
-<sec:authorize access="hasRole('ROLE_ADMIN')">
-<div>
-  <a href=" <c:url value="/product/add?id=${catalog_id}"/>" >Add Product</a>
-</div>
-</sec:authorize>
-
 <spring:url value="/catalog/filter" var="actionUrl" />
 <form method="post" action="${actionUrl}">
   <dl>
@@ -40,7 +34,7 @@
   </tr>
   </thead>
   <tbody>
-  <c:forEach var="product" items="${products}">
+  <c:forEach var="product" items="${page.content}">
       <td> ${product.name} </td>
       <td> ${product.description} </td>
 
@@ -68,3 +62,50 @@
   </c:forEach>
   </tbody>
 </table>
+
+<sec:authorize access="hasRole('ROLE_ADMIN')">
+  <div>
+    <a href=" <c:url value="/product/add?id=${catalog_id}"/>" >Add Product</a>
+  </div>
+</sec:authorize>
+
+<c:url var="firstUrl" value="/catalog/pages/1" />
+<c:url var="lastUrl" value="/catalog/pages/${page.totalPages}" />
+<c:url var="prevUrl" value="/catalog/pages/${currentIndex - 1}" />
+<c:url var="nextUrl" value="/catalog/pages/${currentIndex + 1}" />
+
+<div>
+  <ul class="pagination">
+    <c:choose>
+      <c:when test="${currentIndex == 1}">
+        <li class="disabled"><a href="#">&lt;&lt;</a></li>
+        <li class="disabled"><a href="#">&lt;</a></li>
+      </c:when>
+      <c:otherwise>
+        <li><a href="${firstUrl}">&lt;&lt;</a></li>
+        <li><a href="${prevUrl}">&lt;</a></li>
+      </c:otherwise>
+    </c:choose>
+    <c:forEach var="i" begin="${beginIndex}" end="${endIndex}">
+      <c:url var="pageUrl" value="/catalog/pages/${i}" />
+      <c:choose>
+        <c:when test="${i == currentIndex}">
+          <li class="active"><a href="${pageUrl}"><c:out value="${i}" /></a></li>
+        </c:when>
+        <c:otherwise>
+          <li><a href="${pageUrl}"><c:out value="${i}" /></a></li>
+        </c:otherwise>
+      </c:choose>
+    </c:forEach>
+    <c:choose>
+      <c:when test="${currentIndex == page.totalPages}">
+        <li class="disabled"><a href="#">&gt;</a></li>
+        <li class="disabled"><a href="#">&gt;&gt;</a></li>
+      </c:when>
+      <c:otherwise>
+        <li><a href="${nextUrl}">&gt;</a></li>
+        <li><a href="${lastUrl}">&gt;&gt;</a></li>
+      </c:otherwise>
+    </c:choose>
+  </ul>
+</div>

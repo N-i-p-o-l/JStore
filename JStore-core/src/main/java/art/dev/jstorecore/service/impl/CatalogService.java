@@ -16,7 +16,6 @@ import java.util.List;
 public class CatalogService implements ICatalogService {
 
   @Autowired private CatalogRepository catalogRepository;
-  @Autowired private ProductRepository productRepository;
 
   @Override public List<Catalog> findAll() {
     return catalogRepository.findAll();

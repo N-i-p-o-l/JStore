@@ -2,6 +2,7 @@ package art.dev.jstorecore.service;
 
 import art.dev.jstorecore.entity.Catalog;
 import art.dev.jstorecore.entity.Product;
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,6 +17,8 @@ public interface IProductService {
   List<Product> filterByNameAndCatalogId(String name, long id);
 
   List<Product> findProductsByCatalogId(Long id);
+
+  Page<Product> findProductByCatalogPage(Integer pageNumber, Long id);
 
   @PreAuthorize("hasRole('ROLE_ADMIN')")
   void saveProduct(Product product);

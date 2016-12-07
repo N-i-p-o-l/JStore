@@ -6,6 +6,9 @@ import art.dev.jstorecore.repository.CatalogRepository;
 import art.dev.jstorecore.repository.ProductRepository;
 import art.dev.jstorecore.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +20,8 @@ import java.util.List;
 @Service
 @Transactional
 public class ProductService implements IProductService {
+
+  private static final int PAGE_SIZE = 5;
 
   @Autowired private ProductRepository productRepository;
   @Autowired private CatalogRepository catalogRepository;
@@ -36,6 +41,12 @@ public class ProductService implements IProductService {
   @Override public List<Product> findProductsByCatalogId(Long id) {
     Catalog catalog = catalogRepository.findOne(id);
     return productRepository.findByCatalog(catalog);
+  }
+
+  @Override public Page<Product> findProductByCatalogPage(Integer pageNumber, Long id) {
+    PageRequest request = new PageRequest(pageNumber - 1, PAGE_SIZE, Sort.Direction.ASC, "name");
+    Catalog catalog = catalogRepository.findOne(id);
+    return productRepository.findByCatalog(request, catalog);
   }
 
   @Override
