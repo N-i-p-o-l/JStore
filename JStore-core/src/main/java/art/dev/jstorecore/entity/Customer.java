@@ -1,6 +1,10 @@
 package art.dev.jstorecore.entity;
 
+import art.dev.jstorecore.annotation.UsernameUnique;
+import org.hibernate.validator.constraints.Email;
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Entity
@@ -15,10 +19,16 @@ public class Customer {
   @GeneratedValue
   private Long id;
 
+  @Column(unique = true)
+  @Size(min = 3, message = "Login must be at least 3 characters!")
+  @UsernameUnique(message = "Such login already exists")
   private String login;
 
+  @Size(min = 6, message = "Password must be at least 6 characters!")
   private String password;
 
+  @Email(message = "Invalid e-mail address!")
+  @Size(min = 3, message = "E-mail must be at least 3 characters!")
   private String email;
 
   private Role role;

@@ -13,6 +13,8 @@ public class Catalog {
   @Id @GeneratedValue
   private Long id;
 
+  private String name;
+
   public Long getId() {
     return id;
   }
@@ -28,8 +30,6 @@ public class Catalog {
   public void setName(String name) {
     this.name = name;
   }
-
-  private String name;
 
   @OneToMany(mappedBy = "catalog", cascade = CascadeType.REMOVE)
   private Set<Product> products;

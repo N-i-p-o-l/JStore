@@ -29,7 +29,7 @@
             Password
           </label>
           <div class="col-lg-10">
-            <form:input path="password" type="text" class="form:input-large" placeholder="Password"/>
+            <form:input path="password" type="password" class="form:input-large" placeholder="Password"/>
             <form:errors path="password" cssClass="text-danger"/>
           </div>
         </div>

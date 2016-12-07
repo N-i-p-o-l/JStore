@@ -24,7 +24,7 @@
   <input type="submit" id="btnAdd" class="btn btn-primary" value ="Search"/>
 </form>
 
-<table class="table table-hover">
+<table class="table table-hover" style="table-layout: fixed">
   <thead>
   <tr>
     <th>Name</th>
@@ -56,7 +56,8 @@
       </sec:authorize>
 
       <td>
-        <img src=" <c:url value="/resources/images/${product.id}.png"/> " alt="image" style="width:10%">
+        <img src=" <c:url value="/resources/images/${product.id}.png"/> " alt="image" style="width:20%"
+             onError="this.onError=null;this.src='/resources/images/no-image.png';">
       </td>
     </tr>
   </c:forEach>
@@ -98,7 +99,7 @@
       </c:choose>
     </c:forEach>
     <c:choose>
-      <c:when test="${currentIndex == page.totalPages}">
+      <c:when test="${(currentIndex == page.totalPages) or (page.totalPages == 0)}">
         <li class="disabled"><a href="#">&gt;</a></li>
         <li class="disabled"><a href="#">&gt;&gt;</a></li>
       </c:when>
