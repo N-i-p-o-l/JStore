@@ -1,6 +1,7 @@
 package art.dev.jstoreweb.controller;
 
 import art.dev.jstorecore.service.IWeatherRestTmplService;
+import art.dev.jstorecore.service.IMailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class HomeController {
 
+  @Autowired IMailService mailService;
   @Autowired IWeatherRestTmplService weatherRestTmplService;
 
-  @RequestMapping
+  @GetMapping
   public String welcome(Model model) {
     model.addAttribute("temp", weatherRestTmplService.getTemp());
     return "welcome";

@@ -10,16 +10,38 @@
                http://www.springframework.org/schema/task
                http://www.springframework.org/schema/task/spring-task.xsd">
 
-    <context:component-scan base-package="art.dev">
-        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-    </context:component-scan>
+  <!--Ищем бины кроме контроллеров -->
+  <context:component-scan base-package="art.dev">
+    <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+  </context:component-scan>
 
-    <task:annotation-driven/>
+  <!-- Таск шедулер-->
+  <task:annotation-driven/>
 
-    <context:property-placeholder location="classpath:properties/app.properties"/>
+  <!--Здесь файл свойств -->
+  <context:property-placeholder location="classpath:properties/app.properties"/>
 
-    <beans profile="prod">
-        <import resource="classpath:spring/profile/spring-data-prod.xml"/>
-    </beans>
+  <!--Активный профиль prod -->
+  <beans profile="prod">
+    <import resource="classpath:spring/profile/spring-data-prod.xml"/>
+  </beans>
+
+  <beans>
+    <!-- Класс для отправки писем -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+      <property name="javaMailProperties">
+        <props>
+          <prop key="mail.debug">${mail.debug}</prop>
+          <prop key="mail.smtp.auth">${mail.smtp.auth}</prop>
+          <prop key="mail.smtp.starttls.enable">${mail.smtp.starttls.enable}</prop>
+        </props>
+      </property>
+      <property name="host" value="${mail.host}"/>
+      <property name="port" value="${mail.port}"/>
+      <property name="username" value="${mail.username}"/>
+      <property name="password" value="${mail.password}"/>
+      <property name="protocol" value="${mail.protocol}"/>
+    </bean>
+  </beans>
 
 </beans>
