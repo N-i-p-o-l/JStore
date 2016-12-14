@@ -3,10 +3,20 @@ package art.dev.jstorecore.entity;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.math.BigInteger;
 import java.util.Objects;
 
 @Entity
 @Table(name = "product")
+/*@NamedStoredProcedureQuery(
+    name="findProductOverPrice",
+    procedureName="PRODUCT_OVER_PRICE_V1",
+    resultClasses = { Product.class },
+    parameters={
+        @StoredProcedureParameter(name="_price", type=Long.class, mode=ParameterMode.IN),
+        @StoredProcedureParameter(name="_catalog_id", type=Long.class, mode=ParameterMode.IN)
+    }
+)*/
 public class Product {
 
   @Id @GeneratedValue
@@ -23,6 +33,18 @@ public class Product {
   @ManyToOne
   @JoinColumn(name = "catalog_id")
   private Catalog catalog;
+
+  public Product() {
+  }
+
+  public Product(Object[] fromStoredProcedure) {
+    super();
+    this.id = ((BigInteger) fromStoredProcedure[0]).longValue();
+    this.description = (String) fromStoredProcedure[1];
+    this.name = (String) fromStoredProcedure[2];
+    this.price = ((BigInteger) fromStoredProcedure[3]).longValue();
+    this.unitsInStock = ((BigInteger) fromStoredProcedure[4]).longValue();
+  }
 
   @Override
   public int hashCode() {

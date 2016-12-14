@@ -16,7 +16,7 @@ public class ProductRestController {
 
   @GetMapping("/{id}")
   public @ResponseBody List<Product> getProducts(@PathVariable("id") Long id) {
-    return productService.findProductsByCatalogId(id);
+    return productService.findProductsOverPrice(100L, id);
   }
 
 }

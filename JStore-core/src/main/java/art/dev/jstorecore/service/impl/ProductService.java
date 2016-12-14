@@ -4,6 +4,7 @@ import art.dev.jstorecore.entity.Catalog;
 import art.dev.jstorecore.entity.Product;
 import art.dev.jstorecore.repository.CatalogRepository;
 import art.dev.jstorecore.repository.ProductRepository;
+import art.dev.jstorecore.repository.StoredProcedureRepository;
 import art.dev.jstorecore.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,6 +26,7 @@ public class ProductService implements IProductService {
 
   @Autowired private ProductRepository productRepository;
   @Autowired private CatalogRepository catalogRepository;
+  @Autowired private StoredProcedureRepository storedRepository;
 
   private final static String imagesPath = "resources\\images\\";
 
@@ -47,6 +49,11 @@ public class ProductService implements IProductService {
     PageRequest request = new PageRequest(pageNumber - 1, PAGE_SIZE, Sort.Direction.ASC, "name");
     Catalog catalog = catalogRepository.findOne(id);
     return productRepository.findByCatalog(request, catalog);
+  }
+
+  @Override
+  public List<Product> findProductsOverPrice(Long price, Long catalog) {
+    return storedRepository.findProductOverPrice(price, catalog);
   }
 
   @Override

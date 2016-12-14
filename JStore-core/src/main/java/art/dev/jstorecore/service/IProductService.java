@@ -20,6 +20,8 @@ public interface IProductService {
 
   Page<Product> findProductByCatalogPage(Integer pageNumber, Long id);
 
+  List<Product> findProductsOverPrice(Long price, Long catalog);
+
   @PreAuthorize("hasRole('ROLE_ADMIN')")
   void saveProduct(Product product);
 
