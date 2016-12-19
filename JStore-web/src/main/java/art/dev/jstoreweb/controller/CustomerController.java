@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
@@ -37,5 +38,13 @@ public class CustomerController {
     customerService.saveCustomer(customer);
 
     return "redirect:/";
+  }
+
+  @GetMapping("/all")
+  public ModelAndView getAll() {
+    ModelAndView mv = new ModelAndView();
+    mv.addObject("customers", customerService.findAll());
+    mv.setViewName("customer");
+    return mv;
   }
 }

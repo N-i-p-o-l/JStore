@@ -8,15 +8,6 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "product")
-/*@NamedStoredProcedureQuery(
-    name="findProductOverPrice",
-    procedureName="PRODUCT_OVER_PRICE_V1",
-    resultClasses = { Product.class },
-    parameters={
-        @StoredProcedureParameter(name="_price", type=Long.class, mode=ParameterMode.IN),
-        @StoredProcedureParameter(name="_catalog_id", type=Long.class, mode=ParameterMode.IN)
-    }
-)*/
 public class Product {
 
   @Id @GeneratedValue

@@ -54,4 +54,9 @@
     <put-attribute name="body" value="/WEB-INF/views/product/product-rest.jsp" />
   </definition>
 
+  <definition name="customer" extends="common">
+    <put-attribute name="title" value="page.customer.title" />
+    <put-attribute name="body" value="/WEB-INF/views/customer/customer.jsp" />
+  </definition>
+
 </tiles-definitions>

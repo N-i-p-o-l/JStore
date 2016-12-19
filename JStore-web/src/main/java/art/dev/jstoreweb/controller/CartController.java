@@ -32,7 +32,7 @@ public class CartController {
     return "cart";
   }
 
-  //View for angular
+  //View for angular using REST
   @GetMapping("/view")
   public String getViewWithProducts() {
     return "product-rest";
