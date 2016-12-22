@@ -14,8 +14,6 @@ public final class JsonUtils {
 
   private static class JacksonObjectMapper extends ObjectMapper {
 
-    private static final Logger log = LoggerFactory.getLogger(JacksonObjectMapper.class);
-
     JacksonObjectMapper() {
       configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
     }

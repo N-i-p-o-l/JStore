@@ -46,7 +46,7 @@ public class CustomerController {
     return mv;
   }
 
-  @GetMapping("remove")
+  @GetMapping("/remove")
   @ResponseStatus(HttpStatus.OK)
   public void removeUser(@RequestParam Long id) {
     customerService.removeCustomer(id);

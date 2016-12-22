@@ -2,7 +2,10 @@
 <script type="text/javascript" src="${pageContext.servletContext.contextPath}/resources/js/product.js"></script>
 
 <div class="container" ng-app="product-rest" ng-controller="product-ctrl">
-  <h2>Products</h2>
+
+  <div class="align-left">
+    <h2>Products</h2>
+  </div>
 
   <table class="table table-hover">
     <tr>
@@ -18,5 +21,12 @@
     </tr>
 
   </table>
+
+  <div class="align-right">
+    <select ng-change="getProductOverPrice()"
+            ng-model="price"
+            ng-options="opt as opt.label for opt in options">
+    </select>
+  </div>
 
 </div>

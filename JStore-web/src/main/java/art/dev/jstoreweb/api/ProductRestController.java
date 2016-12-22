@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/v1/product", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/product", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ProductRestController {
 
   @Autowired IProductService productService;
 
-  @GetMapping("/{id}")
-  public @ResponseBody List<Product> getProducts(@PathVariable("id") Long id) {
-    return productService.findProductsOverPrice(100L, id);
+  @GetMapping
+  public @ResponseBody List<Product> getProducts(@RequestParam("price") Long price) {
+    return productService.findProductsOverPrice(price, 2L);
   }
 
 }
